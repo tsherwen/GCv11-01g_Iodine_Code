@@ -13,7 +13,7 @@
 !        R. Sander, Max-Planck Institute for Chemistry, Mainz, Germany
 ! 
 ! File                 : gckpp_LinearAlgebra.f90
-! Time                 : Thu Jan 12 11:34:22 2017
+! Time                 : Sat Jan 14 14:24:34 2017
 ! Working directory    : /n/home13/seastham/GCStandard/Code/Code.v11-01g-Iodine-v1/KPP/Halogens
 ! Equation file        : gckpp.kpp
 ! Output root filename : gckpp
@@ -4190,7 +4190,9 @@ END SUBROUTINE KppSolveTR
       REAL(kind=dp)  ::  Suma
       REAL(kind=dp), PARAMETER  ::  ONE=1.0_dp, HALF=0.5_dp
       LOGICAL, SAVE   ::  First=.TRUE.
-      
+
+!$OMP THREADPRIVATE( Eps, First )      
+
       IF (First) THEN
         First = .FALSE.
         Eps = HALF**(16)

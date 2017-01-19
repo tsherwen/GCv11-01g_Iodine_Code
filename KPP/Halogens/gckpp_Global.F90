@@ -13,7 +13,7 @@
 !        R. Sander, Max-Planck Institute for Chemistry, Mainz, Germany
 ! 
 ! File                 : gckpp_Global.f90
-! Time                 : Thu Jan 12 11:34:22 2017
+! Time                 : Sat Jan 14 14:24:34 2017
 ! Working directory    : /n/home13/seastham/GCStandard/Code/Code.v11-01g-Iodine-v1/KPP/Halogens
 ! Equation file        : gckpp.kpp
 ! Output root filename : gckpp
@@ -69,7 +69,7 @@ MODULE gckpp_Global
 
 ! INLINED global variable declarations
 
-      REAL(kind=dp) :: HET(NSPEC,5), PHOTOL(1000)
+      REAL(kind=dp) :: HET(NSPEC,6), PHOTOL(1000)
       REAL(kind=dp) :: NUMDEN, H2O, PRESS
 
 !-----------------------------------------------------------------------
