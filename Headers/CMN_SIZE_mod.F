@@ -606,7 +606,9 @@
       INTEGER               :: LLCONVM
 
       ! MAXFAM -- Max number of families for prod and loss output
-      INTEGER,    PARAMETER :: MAXFAM = 40
+!      INTEGER,    PARAMETER :: MAXFAM = 40
+      ! MAXFAM increased from 40 to 500 for Halogen diagnostics (tms 2017, 03, 08)
+      INTEGER,    PARAMETER :: MAXFAM = 500
 
       ! MAXMEM is maximum number of families of prod and loss
       ! moved from input_mod and diag_pl_mod to here (hotp 7/31/09)

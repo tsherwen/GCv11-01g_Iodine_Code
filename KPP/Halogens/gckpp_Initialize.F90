@@ -13,8 +13,8 @@
 !        R. Sander, Max-Planck Institute for Chemistry, Mainz, Germany
 ! 
 ! File                 : gckpp_Initialize.f90
-! Time                 : Wed May  3 17:18:07 2017
-! Working directory    : /work/home/ts551/data/all_model_simulations/iodine_runs/iGEOSChem_5.0/code_TMS_new/KPP/Halogens
+! Time                 : Mon Jun 12 19:16:13 2017
+! Working directory    : /work/home/ts551/data/all_model_simulations/iodine_runs/iGEOSChem_5.0/SECOND_BACKUP_code_TMS_new/KPP/Halogens
 ! Equation file        : gckpp.kpp
 ! Output root filename : gckpp
 ! 
