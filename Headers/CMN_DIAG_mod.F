@@ -80,7 +80,9 @@
       INTEGER, PARAMETER :: MAX_DIAG   = 187
 #else
       ! SDE 2013-11-17: Increased to 80 for UCX
-      INTEGER, PARAMETER :: MAX_DIAG   = 80
+!      INTEGER, PARAMETER :: MAX_DIAG   = 80
+      ! TMS 2017-04-08: Increase to 500 for Halogen diagnostics
+      INTEGER, PARAMETER :: MAX_DIAG   = 500
 #endif
 #if   defined( TOMAS )
       INTEGER, PARAMETER :: MAX_TRACER = NNPAR+1   ! For TOMAS (win, 1/25/10)
