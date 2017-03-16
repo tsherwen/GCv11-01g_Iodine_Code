@@ -441,6 +441,12 @@
      T209            =          IGNORE;
      T210            =          IGNORE;
      T211            =          IGNORE;
+     T212            =          IGNORE;
+     T213            =          IGNORE;
+     T214            =          IGNORE;
+     T215            =          IGNORE;
+     T216            =          IGNORE;
+     T217            =          IGNORE;
 
 #DEFFIX
 

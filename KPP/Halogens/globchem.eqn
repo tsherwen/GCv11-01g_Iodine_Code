@@ -713,7 +713,7 @@
 {574} OCS + hv = SO2 + CO :                            PHOTOL(34);
 {575} SO4 + hv = SO2 + 2.000OH :                       PHOTOL(100);
 {577} NO + hv = T152 + O + N :                         PHOTOL(6);
-{578} CH3Br + hv = MO2 + Br :                          PHOTOL(50);
+{578} CH3Br + hv = T212 + MO2 + Br :                   PHOTOL(50);
 {579} BrCl + hv = Br + Cl :                            PHOTOL(33);
 {580} Cl2 + hv = 2.000Cl :                             PHOTOL(22);
 {581} ClO + hv = Cl + O :                              PHOTOL(27);
@@ -758,8 +758,8 @@
 {624} HOBr = T165 + BrCl + H2O :                       HET(ind_HOBr,3);
 {627} ClNO3 + HBr = T166 + BrCl + HNO3 :               HET(ind_ClNO3,3);
 {630} O3 + HBr = HOBr :                                HET(ind_O3,1);
-{633} HCl = O2 :                                       HET(ind_HCl,1);
-{634} HCl = O2 :                                       HET(ind_HCl,2);
+{633} HCl = T213 + O2 :                                HET(ind_HCl,1);
+{634} HCl = T214 + O2 :                                HET(ind_HCl,2);
 // New het - reactions involving BrSALX
 {635} HOBr + BrSALA = T167 + Br2 :                     HET(ind_HOBr,4);
 {636} HOBr + BrSALC = T168 + Br2 :                     HET(ind_HOBr,5);
@@ -846,9 +846,9 @@
 {710} IBr + hv = I + Br :                              PHOTOL(120);
 {711} ICl + hv = I + Cl :                              PHOTOL(121);
 // Iodine uptake reactions
-{712} HI = AERI :                                      HET(ind_HI,1);
-{713} HI = ISALA :                                     HET(ind_HI,2);
-{714} HI = ISALC :                                     HET(ind_HI,3);
+{712} HI = T215 + AERI :                               HET(ind_HI,1);
+{713} HI = T216 + ISALA :                              HET(ind_HI,2);
+{714} HI = T217 + ISALC :                              HET(ind_HI,3);
 {715} HOI = T183 + ISALA :                             HET(ind_HOI,1);
 {716} HOI = T184 + ISALC :                             HET(ind_HOI,2);
 {717} I2O2 = T185 + 2.000AERI :                        HET(ind_I2O2,1);
