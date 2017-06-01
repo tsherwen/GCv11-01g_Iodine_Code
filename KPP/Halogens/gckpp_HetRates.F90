@@ -263,7 +263,6 @@ MODULE GCKPP_HETRATES
       REAL(fp) :: PSCEDUCTCONC(11,2)
 #endif
 
-      INTEGER :: N
 
       !====================================================================
       ! SET_HET begins here!
@@ -521,7 +520,6 @@ MODULE GCKPP_HETRATES
          HET(ind_ClNO3, 3) = kIIR1Ltd( spcVec, ind_('ClNO3'), ind_('HBr'), kITemp, hetMinLife)
 
          ! Extend HOCl + HCl and HOCl + HBr to take place in the troposphere
-	 ! NOTE: the restriction of these reactions to the troposphere has been restored - tms (2017/04/06 )
          HET(ind_HOCl,  1) = kIIR1Ltd( spcVec, ind_('HOCl'),  ind_('HCl'), HETHOCl_HCl(  0.52E2_fp, 0E+0_fp), hetMinLife)
          HET(ind_HOCl,  2) = kIIR1Ltd( spcVec, ind_('HOCl'),  ind_('HBr'), HETHOCl_HBr(  0.52E2_fp, 0E+0_fp), hetMinLife)
 
@@ -557,7 +555,6 @@ MODULE GCKPP_HETRATES
          HET(ind_BrNO3, 2) = kIIR1Ltd( spcVec, ind_('BrNO3'), ind_('HCl'), HETBrNO3_HCl(  1.42E2_fp, 0E+0_fp), hetMinLife)
 
          ! New/extended calculation of N2O5 + HCl on sulfate
-	 ! NOTE: this extension of calculation in troposphere has been removed (tms 17/04/10)
          kITemp = HETN2O5_HCl( 1.08E2_fp, 0.0e+0_fp ) 
          HET(ind_N2O5,  2) = kIIR1Ltd( spcVec, ind_('N2O5'), ind_('HCl'), kITemp, hetMinLife) 
 
@@ -1302,13 +1299,6 @@ MODULE GCKPP_HETRATES
          ELSEIF ((N.eq.11).or.(N.eq.12)) THEN
             ! Sea salt - follows the N2O5 + Cl- channel
             XSTKCF = 0.0e+0_fp
-	 ! restore route for tropospheric sulfate (tms 17/04/10)
-	 ! this is to maintain consistancy with Sherwen et al (2016)
-         ELSEIF (N.eq.8) THEN
-            ! Fixed gamma?
-            !XSTKCF = 0.1e-4_fp ! Sulfate
-            ! RH dependence
-            XSTKCF = N2O5( N, TEMPK, RELHUM )
          ELSE
             ! In UCX, ABSHUMK will have been set by
             ! STT(I,J,L,IDTH2O)
@@ -1478,18 +1468,15 @@ MODULE GCKPP_HETRATES
 
          ! Assume zero
          XStkCf = 0.0e+0_fp
-	 ! restore stratosphere only limitation - tms 17/04/10
-         IF ( STRATBOX ) THEN
-            IF (N.eq.8) THEN
-               ! Fixed gamma?
-               !XSTKCF = 0.1e-4_fp ! Sulfate
-               ! RH dependence
-      	       XSTKCF = N2O5( N, TEMPK, RELHUM )
-	    ENDIF
-          ENDIF
+
+         IF (N.eq.8) THEN
+            ! Fixed gamma?
+            !XSTKCF = 0.1e-4_fp ! Sulfate
+            ! RH dependence
+            XSTKCF = N2O5( N, TEMPK, RELHUM )
 #if defined( UCX )
          ! Only consider PSC reactions in strat
-         IF ( STRATBOX ) THEN
+         ELSEIF ( STRATBOX ) THEN
             IF (N.eq.13) THEN
                XSTKCF = KHETI_SLA(2)
             ELSEIF (N.eq.14) THEN
@@ -2783,15 +2770,10 @@ MODULE GCKPP_HETRATES
          ! Assume zero unless proven otherwise
          XSTKCF = 0e+0_fp
 
-!         IF (N.eq.8) THEN
-!            XSTKCF = 0.1e-4_fp ! Sulfate
-!         ELSEIF ( STRATBOX ) THEN
-!            IF (N.eq.13) THEN
-	 ! restore limitation to stratosphere
-         IF  ( STRATBOX ) THEN
-            IF (N.eq.8) THEN
-               XSTKCF = 0.1e-4_fp ! Sulfate
-            ELSEIF (N.eq.13) THEN
+         IF (N.eq.8) THEN
+            XSTKCF = 0.1e-4_fp ! Sulfate
+         ELSEIF ( STRATBOX ) THEN
+            IF (N.eq.13) THEN
                XSTKCF = KHETI_SLA(4)
             ELSEIF (N.eq.14) THEN
                IF (NATSURFACE) THEN
@@ -2874,11 +2856,11 @@ MODULE GCKPP_HETRATES
 
          ! Default to zero
          XSTKCF = 0.0e+0_fp
-	 ! restore limitation to stratosphere
-	 IF ( STRATBOX ) THEN
-	    IF (N.eq.8) THEN
-               XSTKCF = 0.9e+0_fp ! Sulfate
-            ELSEIF (N.eq.13) THEN
+
+         IF (N.eq.8) THEN
+            XSTKCF = 0.9e+0_fp ! Sulfate
+         ELSEIF ( STRATBOX ) THEN
+            IF (N.eq.13) THEN
                XSTKCF = KHETI_SLA(7)
             ELSEIF (N.eq.14) THEN
                IF (NATSURFACE) THEN
@@ -2961,14 +2943,12 @@ MODULE GCKPP_HETRATES
       DO N = 1, NAERO
 
          XSTKCF        = 0.0_fp
-
+         If (N.eq.8) Then
+            XSTKCF = 0.8e+0_fp ! Sulfate
          ! Only consider PSC reactions in strat
 #if defined( UCX )
-         IF (STRATBOX) Then
-	    ! restore limitation to stratosphere
-	    If (N.eq.8) Then
-	       XSTKCF = 0.8e+0_fp ! Sulfate
-            ELSEIF (N.eq.13) THEN
+         ElseIf (STRATBOX) Then
+            IF (N.eq.13) THEN
                XSTKCF = KHETI_SLA(8)
             ELSEIF (N.eq.14) THEN
                IF (NATSURFACE) THEN
@@ -3053,13 +3033,12 @@ MODULE GCKPP_HETRATES
       DO N = 1, NAERO
 
          XSTKCF        = 0.0_fp
+         If (N.eq.8) Then
+            XSTKCF = 0.8e+0_fp ! Sulfate
          ! Only consider PSC reactions in strat
 #if defined( UCX )
-         IF (STRATBOX) Then
-	 ! restore limitation to stratosphere
-	    IF (N.eq.8) Then
- 	       XSTKCF = 0.8e+0_fp ! Sulfate
-            ELSEIF (N.eq.13) THEN
+         ElseIf (STRATBOX) Then
+            IF (N.eq.13) THEN
                XSTKCF = KHETI_SLA(9)
             ELSEIF (N.eq.14) THEN
                IF (NATSURFACE) THEN
