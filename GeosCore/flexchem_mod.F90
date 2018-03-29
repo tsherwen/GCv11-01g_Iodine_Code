@@ -801,6 +801,26 @@ CONTAINS
        ! Save rate constants in global array
        GLOB_RCONST(I,J,L,:) = RCONST(:)
 
+       ! TMS 18/03/27 - save out rate constants  
+       WRITE(*,*) 'I2O2=>2.AERI', I, J, L, RCONST(621)
+       WRITE(*,*) 'I2O2=>2.ISALA', I, J, L, RCONST(622)
+       WRITE(*,*) 'I2O2=>2.ISALC', I, J, L, RCONST(623)
+       WRITE(*,*) 'I2O3=>2.AERI', I, J, L, RCONST(624)
+       WRITE(*,*) 'I2O3=>2.ISALA', I, J, L, RCONST(625)
+       WRITE(*,*) 'I2O3=>2.ISALC', I, J, L, RCONST(626)
+       WRITE(*,*) 'I2O4=>2.AERI', I, J, L, RCONST(627)
+       WRITE(*,*) 'I2O4=>2.ISALA', I, J, L, RCONST(627)
+       WRITE(*,*) 'I2O4=>2.ISALC', I, J, L, RCONST(627)
+       WRITE(*,*) 'I2O2+hv', I, J, L, RCONST(607)
+       WRITE(*,*) 'I2O4+hv', I, J, L, RCONST(612)
+       WRITE(*,*) 'I2O3+hv', I, J, L, RCONST(613)
+       WRITE(*,*) 'IO+OIO{+M}', I, J, L, RCONST(580)
+       WRITE(*,*) 'OIO+OIO', I, J, L, RCONST(581)
+       WRITE(*,*) 'I2O4{+M}', I, J, L, RCONST(582)
+       WRITE(*,*) 'IO+IO{+M}', I, J, L, RCONST(595)
+       WRITE(*,*) 'I2O2{+M}', I, J, L, RCONST(596)
+       WRITE(*,*) 'I2O2{+M}', I, J, L, RCONST(597)
+
        !==============================================================
        ! Check we have no negative values and copy the concentrations
        ! calculated from the C array back into State_Chm%Species
